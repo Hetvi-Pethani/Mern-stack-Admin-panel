@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Header = () => {
+
     const [show, setShow] = useState(false);
+
+    const handleShow = () => setShow(true);
+
     const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -71,23 +75,6 @@ const Header = () => {
                                 </a>
                             </li>
 
-                            <li>
-                                {/* <Dropdown onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} show={show}>
-
-                                    <Dropdown.Toggle as="span" id="dropdown-basic" style={{ cursor: 'pointer', paddingLeft: 25 }}  >
-                                        All Products
-                                    </Dropdown.Toggle>
-
-                                    <ul>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="/category">Category</Dropdown.Item>
-                                            <Dropdown.Item href="/subcategory">Sub Category</Dropdown.Item>
-                                            <Dropdown.Item href="/exsubcategory">ExSub Category</Dropdown.Item>
-                                            <Dropdown.Item href="/product">product</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </ul>
-                                </Dropdown> */}
-                            </li>
 
                             <li className={`pc-item pc-hasmenu ${isOpen ? 'open' : ''}`}>
                                 <a
@@ -137,11 +124,12 @@ const Header = () => {
                     <div className="me-auto pc-mob-drp">
                         <ul className="list-unstyled">
                             {/* ======= Menu collapse Icon ===== */}
-                            <li className="pc-h-item pc-sidebar-collapse">
+                            <li className="pc-h-item pc-sidebar-collapse" onClick={handleShow}>
                                 <a href="#" className="pc-head-link ms-0" id="sidebar-hide">
                                     <i className="ti ti-menu-2" />
                                 </a>
                             </li>
+
                             <li className="pc-h-item pc-sidebar-popup">
                                 <a href="#" className="pc-head-link ms-0" id="mobile-collapse">
                                     <i className="ti ti-menu-2" />

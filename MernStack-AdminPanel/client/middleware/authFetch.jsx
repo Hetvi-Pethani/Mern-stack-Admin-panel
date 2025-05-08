@@ -4,7 +4,8 @@ export const authFetch = async (url, options = {}) => {
 
   const headers = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...options.headers, 
+
     'Authorization': 'Bearer ' + localStorage.getItem('token')
   };
 

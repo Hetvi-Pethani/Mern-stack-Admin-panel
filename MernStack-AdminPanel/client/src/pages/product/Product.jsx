@@ -6,6 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { authFetch } from "../../../middleware/authfetch";
 
+
 const Product = () => {
 
     const [product, setProduct] = useState([])
@@ -55,7 +56,11 @@ const Product = () => {
             const token = localStorage.getItem('token');
             const response = await authFetch('http://localhost:8000/category/getcategories', {
                 method: 'GET',
-               
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+                // },
+
             });
             const data = await response.json();
             if (response.ok) {
@@ -72,8 +77,12 @@ const Product = () => {
 
             const response = await authFetch('http://localhost:8000/subcategory/getsubcategories', {
                 method: 'GET',
-               
-            })
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+                // },
+
+            });
             const data = await response.json();
             if (response.ok) {
                 setSubcategories(data);
@@ -89,7 +98,11 @@ const Product = () => {
 
             const response = await authFetch('http://localhost:8000/exsubcategory/getexsubcategories', {
                 method: 'GET',
-               
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+                // },
+
             })
             const data = await response.json();
             if (response.ok) {
@@ -107,7 +120,11 @@ const Product = () => {
 
             const response = await authFetch('http://localhost:8000/product/getproducts', {
                 method: 'GET',
-              
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+                // },
+
             })
             const data = await response.json();
             if (response.ok) {
@@ -133,7 +150,6 @@ const Product = () => {
             const res = await fetch(`http://localhost:8000/exsubcategory/ajaxcategorywiserecord?categoryId=${categoryId}`);
             const data = await res.json();
             if (data.status) {
-
                 setSubcategories(data.subcategory);
             }
         } catch (err) {
@@ -145,7 +161,7 @@ const Product = () => {
         const subcategoryId = e.target.value;
         setSelectedSubcategoryId(subcategoryId);
         setSelectedExsubcatId('');
-        
+
         try {
             const res = await fetch(`http://localhost:8000/product/ajaxcategorywiseRecord?subcategoryId=${subcategoryId}`);
             const data = await res.json();
@@ -175,9 +191,11 @@ const Product = () => {
             formData.append('price', price);
             formData.append('image', image);
 
-            const response = await authFetch('http://localhost:8000/product/insertproduct', {
+            const response = await fetch('http://localhost:8000/product/insertproduct', {
                 method: 'POST',
-               
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
                 body: formData
             });
 
@@ -239,7 +257,7 @@ const Product = () => {
             formData.append('image', image);
             formData.append('status', status);
 
-            const response = await authFetch('http://localhost:8000/product/updateproduct', {
+            const response = await fetch('http://localhost:8000/product/updateproduct', {
                 method: 'POST',
                 body: formData,
             });
@@ -275,7 +293,9 @@ const Product = () => {
             try {
                 const response = await authFetch('http://localhost:8000/product/deleteproduct', {
                     method: 'POST',
-                  
+                    // headers: {
+                    //     'Content-Type': 'application/json'
+                    // },
                     body: JSON.stringify({ id })
                 });
                 const data = await response.json();
@@ -332,7 +352,7 @@ const Product = () => {
                     <div className="card table-card">
                         <div className="card-body">
                             <div className="table-responsive">
-                                <table className="table table-hover text-center"  style={{ fontFamily:"cursive"}} id="pc-dt-simple">
+                                <table className="table table-hover text-center" style={{ fontFamily: "cursive" }} id="pc-dt-simple">
                                     <thead>
                                         <tr>
                                             <th>Id</th>

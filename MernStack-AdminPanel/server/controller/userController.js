@@ -50,8 +50,8 @@ const loginUser = async (req, res) => {
                 return res.status(500).json({ message: 'internal server error' })
             }
             if (result) {
-                const token = jwt.sign({ id: user._id }, "secret", { expiresIn: '1m' });
-
+                const token = jwt.sign({ id: user._id }, "secret", { expiresIn: '1h' });
+                
                 console.log('user logged in successfully')
                 return res.status(200).json({ message: 'user logged in successfully', token: token })
             } else {
@@ -70,3 +70,5 @@ const loginUser = async (req, res) => {
 module.exports = {
     registerUser, loginUser
 }
+
+

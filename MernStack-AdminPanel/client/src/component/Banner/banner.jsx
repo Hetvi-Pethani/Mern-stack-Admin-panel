@@ -11,16 +11,11 @@ const Banner = () => {
 
 
     useEffect(() => {
-
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');
         if (!token) {
-            navigate('/')
+            navigate('/'); // if no token, go back to login
         }
-        if (token) {
-            navigate('/banner')
-           
-        }
-    }, [navigate])
+    }, [navigate]);
 
 
     const VisitorChart = () => {
